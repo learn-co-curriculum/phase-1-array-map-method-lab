@@ -2,35 +2,32 @@
 
 ## Learning Goals
 
-* Implement a `map()` function from scratch
+* Define how the `map()` method works
+* Use `map()` on complex data structures
+
 
 ## Introduction
 
-In a lot of code you'll be writing as a soon-to-be JS expert, you'll be
-iterating over arrays. Sometimes, you'll want to apply a transformation
-to the elements in the array. We can do this using `for` loops, but
-writing all of that stuff gets tedious after a while. Let's create our
-own helper method called `map()` to make things a little easier!
+Iterating over arrays is a very common task we will find ourselves
+performing as developers. Using `for` loops, can get tedious after
+a while. Rather than using `for` loops and nesting to process data
+in lists and collections, you can take advantage a method like `map()`
+to better organize your logic into building blocks of functions,
+and then chain them to create more readable and understandable
+implementations.
 
-## Implement a `map()` Function From Scratch
+## Define How the `map()` Method Works
 
-To start things off, let's write a `map()` function that abstracts away
-the `for` loop:
+`Array.prototype.map()` is an array method that iterates over all elements,
+allowing you to apply a function to each element in that array, effectively
+transforming them into something else. The result is then returned as a *new*
+array, leaving the original array intact and unmodified (but remember, **not**
+the elements we modify, necessitating the need for defensive copying). That
+last part is super important, because it either saves us from having to create
+a new array ourselves and copy stuff in there, **or** modifying the original
+elements in the array
 
-```js
-function map(collection) {
-  for (let i = 0; i < collection.length; i++) {
-    const element = collection[i];
-    console.log(element);
-  }
-}
-```
-
-This will log all of the elements in the array. Not terribly interesting.
-Let's add a second argument so we can pass a function to our `map()` function.
-This function will receive the `element` and can then optionally transform it.
-We'll also need a new array to store our results in, so we can return the result
-when we're done:
+Let's look at how a `map()` function may be written using a `for` loo:
 
 ```js
 function map(collection, callback) {
@@ -44,9 +41,7 @@ function map(collection, callback) {
   return result;
 }
 ```
-
-Sweet! That should work for now. Let's take this baby for a spin by doubling a
-list of numbers:
+Let's test this function that will double a list of numbers:
 
 ```js
 const numbers = [1, 2, 3];
@@ -55,98 +50,36 @@ const doubledNumbers = map(numbers, function (number) {
 });
 console.log(doubledNumbers); // prints [2, 4, 6]
 ```
-
-In case we ever need the index of the item or the full list of items in our
-callback function, let's add these as arguments to our callback. The callback
-doesn't **have** to use these values, but they're there if we ever need them.
+Using the `map()` function that is already part of the JS standard
+library, we will map the same elements to a new array.
 
 ```js
-function map(collection, callback) {
-  const result = [];
-
-  for (let i = 0; i < collection.length; i++) {
-    const element = collection[i];
-    result.push(callback(element, i, collection));
-  }
-
-  return result;
-}
+const doubles = numbers.map(function(num) {
+  return num * 2;
+});
+console.log(doubles); // prints [2, 4, 6]
 ```
 
-Let's use our `map()` function on a trickier data structure — a list of Autobots.
-To start things off, we have an array of Autobots. Now, let's transform all of
-them to their robotic form! A transformed Autobot needs to be marked as such
-using the `isTransformed` boolean, as well as have its strength doubled:
+## Use `map()` on Complex Data Structures
+
+Let's use the `map()` function on a trickier data structure — a list of robots.
+To start things off, we have an array of robots. Now, let's activate all of
+them. An activated robot needs to be marked as such using the `isActivated`
+boolean, as well as have its strength doubled:
 
 ```js
-const autobots = [
-  { name: 'Optimus Prime', strength: 5, isTransformed: false, },
-  { name: 'Ironhide', strength: 3, isTransformed: false, },
-  { name: 'Bumblebee', strength: 2.5, isTransformed: false, },
-  { name: 'Ratchet', strength: 1.5, isTransformed: false, },
-];
-
-const transformedAutobots = map(autobots, function (autobot) {
-  return Object.assign({}, autobot, {
-    strength: autobot.strength * 2,
-    isTransformed: true,
+const activatedRobots = robots.map(function (robot) {
+  return Object.assign({}, robot, {
+    strength: robot.strength * 2,
+    isActivated: true,
   });
 });
 
-console.log(transformedAutobots);
-/*
- Result:
-
- [
-   { name: 'Optimus Prime', strength: 10, isTransformed: true },
-   { name: 'Ironhide', strength: 6, isTransformed: true },
-   { name: 'Bumblebee', strength: 5, isTransformed: true },
-   { name: 'Ratchet', strength: 3, isTransformed: true }
- ]
-*/
+console.log(activatedRobots);
 ```
-
-We're using `Object.assign()` here to defensively copy the object and change
-its values. If we didn't, the objects in the original array would get modified
-too. Defensive copying is important to keep in mind — modifying values all
-over our code is often the biggest source of bugs.
-
-Time for a confession. We basically just implemented something that is already
-part of the JS standard library. Sisyphus has nothing on us! To map elements 
-n an array, we can simply use `Array.prototype.map()`.
-
-Much like our own `map()` function, `Array.prototype.map()` is an array method
-that iterates over all elements, allowing you to apply a function to each
-element in that array, effectively transforming them into something else. The
-result is then returned as a *new* array, leaving the original array intact
-and unmodified (but remember, **not** the elements we modify, necessitating
-the need for defensive copying). That last part is super important, because
-it either saves us from having to create a new array ourselves and copy stuff
-in there, **or** modifying the original elements in the array — much like what
-we did in our own `map()` function.
-
-Just so you believe I'm not pulling your leg, let's see what it looks like:
-
-```js
-const transformedAutobotsWithMap = autobots.map(function (autobot) {
-  return Object.assign({}, autobot, {
-    strength: autobot.strength * 2,
-    isTransformed: true,
-  });
-});
-
-console.log(transformedAutobotsWithMap);
-```
-
-In this code snippet, we're using the native `.map()` function that is a property
-of `Array`'s prototype. It gives us the exact same result! Now that we know how
-map is implemented, it holds no more secrets for us! We can discard our own `map()`
-function and just use the `.map()` property on arrays. Sweet!
 
 ## Conclusion
 
 ## Resources
 
 - [MDN: Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
-
-<p class='util--hide'>View <a href='https://learn.co/lessons/javascript-map'>Map</a> on Learn.co and start learning to code for free.</p>
