@@ -3,6 +3,7 @@
 ## Learning Goals
 
 * Define how the `map()` method works
+* Demonstrate `map()`
 * Use `map()` on complex data structures
 
 
@@ -27,38 +28,96 @@ last part is super important, because it either saves us from having to create
 a new array ourselves and copy stuff in there, **or** modifying the original
 elements in the array
 
-Let's look at how a `map()` function may be written using a `for` loo:
+## Demonstrate `map()`
+
+We use `map()` when we want to perform some operation on each element in the
+collection, and "gather" the results into a new `Array`.
+
+We'll also use this as a chance to demonstrate some of the power of
+functions in JavaScript. We'll write `map()` **four times** so you can see how
+the iterator functions allow us to write more _expressive_ code.
+
+### `for` and `for...of`
+
+In this example, we are using a standard bit of iteration code. Because
+`for ` and `for...of` are _general_ functions that can be used to do lots
+of things another programmer won't be sure if the inner workings' return
+values are important or not.
 
 ```js
-function map(collection, callback) {
-  const result = [];
+let students = [harryPotter, ronWeasley, hermioneGranger, ginevraWeasley];
+let patroni = []; // Patroni, sg. patronus
 
-  for (let i = 0; i < collection.length; i++) {
-    const element = collection[i];
-    result.push(callback(element));
-  }
-
-  return result;
+for (const student of students) {
+  patroni.push( student.namePatronus() );
 }
+
+//=> patroni = ["Stag", "Jack Russell Terrier", "Otter", "Horse"];
 ```
-Let's test this function that will double a list of numbers:
+
+When we write `.map()` we are saying to other programmers: expect a new array
+to come out of this thing after each element is touched! Let's use that more
+expressive function name.
+
+### `map()` and a function declaration
 
 ```js
-const numbers = [1, 2, 3];
-const doubledNumbers = map(numbers, function (number) {
- return number * 2;
-});
-console.log(doubledNumbers); // prints [2, 4, 6]
+function studentPatronusName(student) {
+  return student.namePatronus();
+}
+
+let students = [harryPotter, ronWeasley, hermioneGranger, ginevraWeasley];
+let patroni = students.map(studentPatronusName);
+//=> patroni = ["Stag", "Jack Russell Terrier", "Otter", "Horse"];
 ```
-Using the `map()` function that is already part of the JS standard
-library, we will map the same elements to a new array.
+
+With `map()` we're passing a function _as an argument_. Yes, arguments can be
+things like `Number` or `String`...but, in JavaScript, **can also** be
+**work**. Very few other programming languages allow that! That's worthy of a
+Keanu "Whoa."
+
+![Whoa](https://media.giphy.com/media/ALZ1PPM20REZ2/giphy.gif)
+
+The iterator functions like `map()` expect to be _passed a function as an
+argument_ which they will hand each of their elements off to. In the case of
+`map()` it hands each element to the function and captures the return value of
+the function into a new `Array`.
+
+This code is more expressive because it lives up to the promise of map. It
+creates a new `Array` after each element is "touched" by a function.
+
+One drawback to this code is that the `studentPatronusName` function doesn't do
+much work. It just returns something that the `student` _already_ knew how to
+do.  What if we use a function expression ("anonymous function") instead?
+
+### `map` and a function expression
 
 ```js
-const doubles = numbers.map(function(num) {
-  return num * 2;
+let students = [harryPotter, ronWeasley, hermioneGranger, ginevraWeasley];
+let patroni = students.map(function(student) {
+  return student.namePatronus();
 });
-console.log(doubles); // prints [2, 4, 6]
+//=> patroni = ["Stag", "Jack Russell Terrier", "Otter", "Horse"];
 ```
+
+Wow, that's more terse! It has all the same advantages of the previous version.
+
+### `map` and an arrow function
+
+Thanks to arrow functions, we can shorten up the function expression to:
+
+```js
+// When the parameter list is only one element, we can drop () !
+let students = [harryPotter, ronWeasley, hermioneGranger, ginevraWeasley];
+let patroni = students.map( student => student.namePatronus() )
+//=> patroni = ["Stag", "Jack Russell Terrier", "Otter", "Horse"];
+```
+
+Wow, things are much less verbose! There is much less noisy JavaScript code so
+the _expressiveness_ has increased: "`patroni` is the result of `map`-ing
+`students` and asking each for the result of its `namePatronus` method".
+
+For the rest of of these examples, we'll use the arrow function.
 
 ## Use `map()` on Complex Data Structures
 
