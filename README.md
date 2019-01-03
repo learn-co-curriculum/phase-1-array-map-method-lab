@@ -3,8 +3,8 @@
 ## Learning Goals
 
 * Define how the `map()` method works
-* Demonstrate `map()`
-* Use `map()` on complex data structures
+* Demonstrate `map()` with `Array`s
+* Demonstrate `map()` with complex data structures
 
 
 ## Introduction
@@ -28,7 +28,7 @@ last part is super important, because it either saves us from having to create
 a new array ourselves and copy stuff in there, **or** modifying the original
 elements in the array
 
-## Demonstrate `map()`
+## Demonstrate `map()` with `Array`s
 
 We use `map()` when we want to perform some operation on each element in the
 collection, and "gather" the results into a new `Array`.
@@ -119,7 +119,7 @@ the _expressiveness_ has increased: "`patroni` is the result of `map`-ing
 
 For the rest of of these examples, we'll use the arrow function.
 
-## Use `map()` on Complex Data Structures
+## Demonstrate `map()` with Complex Data Structures
 
 Let's use the `map()` function on a trickier data structure — a list of robots.
 To start things off, we have an array of robots. Now, let's activate all of
