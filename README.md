@@ -65,20 +65,47 @@ console.log(doubles); // prints [2, 4, 6]
 Let's use the `map()` function on a trickier data structure — a list of robots.
 To start things off, we have an array of robots. Now, let's activate all of
 them. An activated robot needs to be marked as such using the `isActivated`
-boolean, as well as have its strength doubled:
+boolean, as well as have its number of modes doubled:
 
 ```js
+const robots = [
+  { name: 'Johnny 5', modes: 5, isActivated: false, },
+  { name: 'C3PO', modes: 3, isActivated: false, },
+  { name: 'Sonny', modes: 2.5, isActivated: false, },
+  { name: 'Baymax', modes: 1.5, isActivated: false, },
+];
+
 const activatedRobots = robots.map(function (robot) {
   return Object.assign({}, robot, {
-    strength: robot.strength * 2,
+    modes: robot.strength * 2,
     isActivated: true,
   });
 });
 
 console.log(activatedRobots);
+
+/*
+ Result:
+ [
+   { name: 'Johnny 5', modes: 10, isActivated: true },
+   { name: 'C3PO', modes: 6, isActivated: true },
+   { name: 'Sonny', modes: 5, isActivated: true },
+   { name: 'Baymax', modes: 3, isActivated: true }
+ ]
+*/
 ```
 
+With  the native `map()` function that is a property
+of `Array`'s prototype. It gives us the exact same result! Now that we know how
+map is implemented, it holds no more secrets for us! We can discard our own `map()`
+function and just use the `.map()` property on arrays. Sweet!
+
 ## Conclusion
+
+`map()` takes 2 arguments--a callback and the optional context. The callback runs
+for each value in an array and returns each new value in the resulting array. It
+returns a new array that is the same length as the original array and saves time
+while making the code simpler and easy to read.
 
 ## Resources
 
