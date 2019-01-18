@@ -5,6 +5,7 @@
 * Define how the `map()` method works
 * Demonstrate `map()` with `Array`s
 * Demonstrate `map()` with complex data structures
+* Use `map()` to generate a new array
 
 
 ## Introduction
@@ -43,14 +44,14 @@ of things another programmer won't be sure if the inner workings return
 values are important or not.
 
 ```js
-let students = [harryPotter, ronWeasley, hermioneGranger, ginevraWeasley];
-let patroni = []; // Patroni, sg. patronus
+let students = ["harry", "ron", "hermione", "ginevra"];
+let rollCall = [];
 
 for (const student of students) {
-  patroni.push( student.namePatronus() );
+  rollCall.push( student + " the wizard" );
 }
 
-//=> patroni = ["Stag", "Jack Russell Terrier", "Otter", "Horse"];
+//=> rollCall = ["harry the wizard", "ron the wizard", "hermione the wizard", "ginevra the wizard"];
 ```
 
 When we write `.map()` we are saying to other programmers: "Expect a new array
@@ -59,13 +60,13 @@ to come out of this after each element is touched!"
 ### `map()` and a function declaration
 
 ```js
-function studentPatronusName(student) {
-  return student.namePatronus();
+function studentRollCall(student) {
+  return student + " the wizard";
 }
 
-let students = [harryPotter, ronWeasley, hermioneGranger, ginevraWeasley];
-let patroni = students.map(studentPatronusName);
-//=> patroni = ["Stag", "Jack Russell Terrier", "Otter", "Horse"];
+let students = ["harry", "ron", "hermione", "ginevra"];
+let rollCall = students.map(studentRollCall);
+//=> rollCall = ["harry the wizard", "ron the wizard", "hermione the wizard", "ginevra the wizard"];
 ```
 
 With `map()` we're passing a function _as an argument_. Arguments can be
@@ -80,18 +81,18 @@ the function into a new `Array`.
 This code is more _expressive_ because it lives up to the promise of map. It
 creates a new `Array` after each element is "touched" by a function.
 
-One drawback to this code is that the `studentPatronusName` function doesn't do
+One drawback to this code is that the `studentRollCall` function doesn't do
 much work. It just returns something that the `student` _already_ knew how to
 do.  What if we use a function expression ("anonymous function") instead?
 
 ### `map` and a function expression
 
 ```js
-let students = [harryPotter, ronWeasley, hermioneGranger, ginevraWeasley];
-let patroni = students.map(function(student) {
-  return student.namePatronus();
+let students = ["harry", "ron", "hermione", "ginevra"];
+let rollCall = students.map(function(student) {
+  return student + " the wizard";
 });
-//=> patroni = ["Stag", "Jack Russell Terrier", "Otter", "Horse"];
+//=> rollCall = ["harry the wizard", "ron the wizard", "hermione the wizard", "ginevra the wizard"];
 ```
 
 That's much shorter. It has all the same advantages of the previous version.
@@ -102,9 +103,9 @@ Thanks to arrow functions, we can shorten up the function expression to:
 
 ```js
 // When the parameter list is only one element, we can drop () !
-let students = [harryPotter, ronWeasley, hermioneGranger, ginevraWeasley];
-let patroni = students.map( student => student.namePatronus() )
-//=> patroni = ["Stag", "Jack Russell Terrier", "Otter", "Horse"];
+let students = ["harry", "ron", "hermione", "ginevra"];
+let rollCall = students.map( student => student + " the wizard" )
+//=> rollCall = ["harry the wizard", "ron the wizard", "hermione the wizard", "ginevra the wizard"];
 ```
 
 The code now fits on one line! There is much less noisy JavaScript code so
@@ -130,7 +131,7 @@ const robots = [
 
 const activatedRobots = robots.map(function (robot) {
   return Object.assign({}, robot, {
-    modes: robot.strength * 2,
+    modes: robot.modes * 2,
     isActivated: true,
   });
 });
@@ -152,6 +153,30 @@ With  the native `map()` function that is a property of `Array`'s prototype.
 It gives us the exact same result! Now that we know how map is implemented,
 it holds no more secrets for us! We can discard our own `map()` function and
 just use the `.map()` property on arrays.
+
+## Use `map()` to Generate a New Array
+
+Let's put our newly acquired knowledge of `map()` to use! We just bought 10 coding
+tutorials online, but some of them are very long. We're going to use the `duration`
+value to determine which lessons to knock out first. Create a new array with just
+the name of each tutorial that is 60 minutes (1 hour) or less long.
+
+```js
+const tutorials = [
+  { name: 'What does the this keyword mean?', duration: 80 },
+  { name: 'What is the Constructor OO pattern?', duration: 40 },
+  { name: 'Implementing Blockchain Web API', duration: 100 },
+  { name: 'The Test Driven Development Workflow', duration: 140 },
+  { name: 'What is NaN and how can we check for it', duration: 50 },
+  { name: 'What is the difference between stopPropagation and preventDefault?', duration: 90 },
+  { name: 'Immutable State and Pure Functions', duration: 75 },
+  { name: 'What is the difference between == and ===?', duration: 30 },
+  { name: 'What is the difference between event capturing and bubbling?', duration: 60 },
+  { name: 'What is JSONP?', duration: 25 },
+];
+```
+
+Run `learn` and ensure that tests are passing.
 
 ## Conclusion
 
