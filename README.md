@@ -149,8 +149,8 @@ console.log(activatedRobots);
 */
 ```
 
-With  the native `map()` function that is a property of `Array`'s prototype.
-It gives us the exact same result! Now that we know how map is implemented,
+With  the native `map()` function that is a property of `Array`'s prototype,
+it gives us the exact same result! Now that we know how map is implemented,
 it holds no more secrets for us! We can discard our own `map()` function and
 just use the `.map()` property on arrays.
 
