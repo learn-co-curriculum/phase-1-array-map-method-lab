@@ -26,7 +26,7 @@ requires defensive copying). This is super important, because it saves us from
 having to create a new array ourselves and copy stuff in there, **or** modifying
 the original elements in the array, which we may need later.
 
-## Demonstrate `map()` with `Array`s
+## Demonstrate `map()` With `Array`s
 
 We use `map()` when we want to perform an action on each element in the collection,
 and "gather" the results into a new `Array`.
@@ -56,7 +56,7 @@ for (const student of students) {
 When we write `.map()` we are saying to other programmers: "Expect a new array
 to come out of this after each element is touched!"
 
-### `map()` and a function declaration
+### `map()` and a Function Declaration
 
 ```js
 function studentPatronusName(student) {
@@ -84,7 +84,7 @@ One drawback to this code is that the `studentPatronusName` function doesn't do
 much work. It just returns something that the `student` _already_ knew how to
 do.  What if we use a function expression ("anonymous function") instead?
 
-### `map` and a function expression
+### `map()` With a Function Expression
 
 ```js
 let students = [harryPotter, ronWeasley, hermioneGranger, ginevraWeasley];
@@ -96,7 +96,7 @@ let patroni = students.map(function(student) {
 
 That's much shorter. It has all the same advantages of the previous version.
 
-### `map` and an arrow function
+### `map()` With an Arrow Function
 
 Thanks to arrow functions, we can shorten up the function expression to:
 
@@ -151,7 +151,7 @@ console.log(activatedRobots);
 With  the native `map()` function that is a property of `Array`'s prototype.
 It gives us the exact same result! Now that we know how map is implemented,
 it holds no more secrets for us! We can discard our own `map()` function and
-just use the `.map()` property on arrays.
+just use the `map()` property on arrays.
 
 ## Conclusion
 
