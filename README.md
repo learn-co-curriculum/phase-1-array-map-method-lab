@@ -5,12 +5,13 @@
 * Define how the `map()` method works
 * Demonstrate `map()` with `Array`s
 * Demonstrate `map()` with complex data structures
+* Use `map()` to generate a new array
 
 
 ## Introduction
 
 As developers, we find ourselves responsible for all sorts of common, but
-tedious tasks, such as iterating over arrays. Although a `for` loop or nesting
+tedious, tasks, such as iterating over arrays. Although a `for` loop or nesting
 in lists and collections will complete the task, we can take advantage of a
 method like `map()` to organize and optimize our code into building blocks
 of functions, which we can then chain together to create more readable and
@@ -43,33 +44,33 @@ of things another programmer won't be sure if the inner workings return
 values are important or not.
 
 ```js
-let students = [harryPotter, ronWeasley, hermioneGranger, ginevraWeasley];
-let patroni = []; // Patroni, sg. patronus
+let students = ["harry", "ron", "hermione", "ginevra"];
+let rollCall = [];
 
 for (const student of students) {
-  patroni.push( student.namePatronus() );
+  rollCall.push( student + " the wizard" );
 }
 
-//=> patroni = ["Stag", "Jack Russell Terrier", "Otter", "Horse"];
+//=> rollCall = ["harry the wizard", "ron the wizard", "hermione the wizard", "ginevra the wizard"];
 ```
 
 When we write `.map()` we are saying to other programmers: "Expect a new array
 to come out of this after each element is touched!"
 
-### `map()` and a Function Declaration
+### `map()` With a Function Declaration
 
 ```js
-function studentPatronusName(student) {
-  return student.namePatronus();
+function studentRollCall(student) {
+  return student + " the wizard";
 }
 
-let students = [harryPotter, ronWeasley, hermioneGranger, ginevraWeasley];
-let patroni = students.map(studentPatronusName);
-//=> patroni = ["Stag", "Jack Russell Terrier", "Otter", "Horse"];
+let students = ["harry", "ron", "hermione", "ginevra"];
+let rollCall = students.map(studentRollCall);
+//=> rollCall = ["harry the wizard", "ron the wizard", "hermione the wizard", "ginevra the wizard"];
 ```
-
-With `map()` we're passing a function _as an argument_. Arguments can be
-things like `Number` or `String`, but, in JavaScript, **can also** be
+With `map()`, we have a list of _n_ things and want that list of _n_ things
+to be transformed. Here, we're passing a function _as an argument_. Arguments
+can be things like `Number` or `String`, but, in JavaScript, **can also** be
 **work**. Very few other programming languages allow that!
 
 The iterator function `map()` expects to be _passed a function as an
@@ -80,18 +81,18 @@ the function into a new `Array`.
 This code is more _expressive_ because it lives up to the promise of map. It
 creates a new `Array` after each element is "touched" by a function.
 
-One drawback to this code is that the `studentPatronusName` function doesn't do
+One drawback to this code is that the `studentRollCall` function doesn't do
 much work. It just returns something that the `student` _already_ knew how to
 do.  What if we use a function expression ("anonymous function") instead?
 
 ### `map()` With a Function Expression
 
 ```js
-let students = [harryPotter, ronWeasley, hermioneGranger, ginevraWeasley];
-let patroni = students.map(function(student) {
-  return student.namePatronus();
+let students = ["harry", "ron", "hermione", "ginevra"];
+let rollCall = students.map(function(student) {
+  return student + " the wizard";
 });
-//=> patroni = ["Stag", "Jack Russell Terrier", "Otter", "Horse"];
+//=> rollCall = ["harry the wizard", "ron the wizard", "hermione the wizard", "ginevra the wizard"];
 ```
 
 That's much shorter. It has all the same advantages of the previous version.
@@ -102,18 +103,18 @@ Thanks to arrow functions, we can shorten up the function expression to:
 
 ```js
 // When the parameter list is only one element, we can drop () !
-let students = [harryPotter, ronWeasley, hermioneGranger, ginevraWeasley];
-let patroni = students.map( student => student.namePatronus() )
-//=> patroni = ["Stag", "Jack Russell Terrier", "Otter", "Horse"];
+let students = ["harry", "ron", "hermione", "ginevra"];
+let rollCall = students.map( student => student + " the wizard" )
+//=> rollCall = ["harry the wizard", "ron the wizard", "hermione the wizard", "ginevra the wizard"];
 ```
 
 The code now fits on one line! There is much less noisy JavaScript code so
-the _expressiveness_ has increased: "`patroni` is the result of `map`-ing
-`students` and asking each for the result of its `namePatronus` method".
+the _expressiveness_ has increased: "`rollCall` is the result of `map`-ing
+`students`.
 
 For the rest of of these examples, we'll use the arrow function.
 
-## Demonstrate `map()` with Complex Data Structures
+## Demonstrate `map()` With Complex Data Structures
 
 Let's use the `map()` function on a trickier data structure — a list of robots.
 To start things off, we have an array of robots. Now, let's activate all of
@@ -130,7 +131,7 @@ const robots = [
 
 const activatedRobots = robots.map(function (robot) {
   return Object.assign({}, robot, {
-    modes: robot.strength * 2,
+    modes: robot.modes * 2,
     isActivated: true,
   });
 });
@@ -148,10 +149,35 @@ console.log(activatedRobots);
 */
 ```
 
-With  the native `map()` function that is a property of `Array`'s prototype.
-It gives us the exact same result! Now that we know how map is implemented,
+With  the native `map()` function that is a property of `Array`'s prototype,
+it gives us the exact same result! Now that we know how map is implemented,
 it holds no more secrets for us! We can discard our own `map()` function and
 just use the `map()` property on arrays.
+
+## Use `map()` to Generate a New Array
+
+Let's put our newly acquired knowledge of `map()` to use! We just uploaded 10 coding
+tutorials online, but some of them have inconsistent casing. We want all the titles
+to be "title case", in other words, the _first_ letter of each word is capitalized.
+Create a new array with the new names of each tutorial that is in the proper title
+case formatting.
+
+```js
+const tutorials = [
+  'what does the this keyword mean?',
+  'What is the Contutorialuctor OO pattern?',
+  'implementing Blockchain Web API',
+  'The Test Driven Development Workflow',
+  'What is NaN and how Can we Check for it',
+  'What is the difference between stopPropagation and preventDefault?',
+  'Immutable State and Pure Functions',
+  'what is the difference between == and ===?',
+  'what is the difference between event capturing and bubbling?',
+  'what is JSONP?'
+];
+```
+
+Run `learn` and ensure that tests are passing.
 
 ## Conclusion
 
