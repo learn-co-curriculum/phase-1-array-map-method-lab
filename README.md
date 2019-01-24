@@ -11,7 +11,7 @@
 ## Introduction
 
 As developers, we find ourselves responsible for all sorts of common, but
-tedious tasks, such as iterating over arrays. Although a `for` loop or nesting
+tedious, tasks, such as iterating over arrays. Although a `for` loop or nesting
 in lists and collections will complete the task, we can take advantage of a
 method like `map()` to organize and optimize our code into building blocks
 of functions, which we can then chain together to create more readable and
