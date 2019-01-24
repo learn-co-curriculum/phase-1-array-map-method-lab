@@ -68,9 +68,9 @@ let students = ["harry", "ron", "hermione", "ginevra"];
 let rollCall = students.map(studentRollCall);
 //=> rollCall = ["harry the wizard", "ron the wizard", "hermione the wizard", "ginevra the wizard"];
 ```
-
-With `map()` we're passing a function _as an argument_. Arguments can be
-things like `Number` or `String`, but, in JavaScript, **can also** be
+With `map()`, we have a list of _n_ things and want that list of _n_ things
+to be transformed. Here, we're passing a function _as an argument_. Arguments
+can be things like `Number` or `String`, but, in JavaScript, **can also** be
 **work**. Very few other programming languages allow that!
 
 The iterator function `map()` expects to be _passed a function as an
@@ -109,8 +109,7 @@ let rollCall = students.map( student => student + " the wizard" )
 ```
 
 The code now fits on one line! There is much less noisy JavaScript code so
-the _expressiveness_ has increased: "`patroni` is the result of `map`-ing
-`students` and asking each for the result of its `namePatronus` method".
+the expressiveness has increased: "rollCall is the result of map-ing students.
 
 For the rest of of these examples, we'll use the arrow function.
 
