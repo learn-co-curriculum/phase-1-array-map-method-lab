@@ -27,7 +27,7 @@ requires defensive copying). This is super important, because it saves us from
 having to create a new array ourselves and copy stuff in there, **or** modifying
 the original elements in the array, which we may need later.
 
-## Demonstrate `map()` with `Array`s
+## Demonstrate `map()` With `Array`s
 
 We use `map()` when we want to perform an action on each element in the collection,
 and "gather" the results into a new `Array`.
@@ -57,7 +57,7 @@ for (const student of students) {
 When we write `.map()` we are saying to other programmers: "Expect a new array
 to come out of this after each element is touched!"
 
-### `map()` and a function declaration
+### `map()` With a Function Declaration
 
 ```js
 function studentRollCall(student) {
@@ -85,7 +85,7 @@ One drawback to this code is that the `studentRollCall` function doesn't do
 much work. It just returns something that the `student` _already_ knew how to
 do.  What if we use a function expression ("anonymous function") instead?
 
-### `map` and a function expression
+### `map()` With a Function Expression
 
 ```js
 let students = ["harry", "ron", "hermione", "ginevra"];
@@ -97,7 +97,7 @@ let rollCall = students.map(function(student) {
 
 That's much shorter. It has all the same advantages of the previous version.
 
-### `map` and an arrow function
+### `map()` With an Arrow Function
 
 Thanks to arrow functions, we can shorten up the function expression to:
 
@@ -109,11 +109,12 @@ let rollCall = students.map( student => student + " the wizard" )
 ```
 
 The code now fits on one line! There is much less noisy JavaScript code so
-the expressiveness has increased: "rollCall is the result of map-ing students.
+the _expressiveness_ has increased: "`rollCall` is the result of `map`-ing
+`students`.
 
 For the rest of of these examples, we'll use the arrow function.
 
-## Demonstrate `map()` with Complex Data Structures
+## Demonstrate `map()` With Complex Data Structures
 
 Let's use the `map()` function on a trickier data structure — a list of robots.
 To start things off, we have an array of robots. Now, let's activate all of
@@ -151,27 +152,28 @@ console.log(activatedRobots);
 With  the native `map()` function that is a property of `Array`'s prototype,
 it gives us the exact same result! Now that we know how map is implemented,
 it holds no more secrets for us! We can discard our own `map()` function and
-just use the `.map()` property on arrays.
+just use the `map()` property on arrays.
 
 ## Use `map()` to Generate a New Array
 
-Let's put our newly acquired knowledge of `map()` to use! We just bought 10 coding
-tutorials online, but some of them are very long. We're going to use the `duration`
-value to determine which lessons to knock out first. Create a new array with just
-the name of each tutorial that is 60 minutes (1 hour) or less long.
+Let's put our newly acquired knowledge of `map()` to use! We just uploaded 10 coding
+tutorials online, but some of them have inconsistent casing. We want all the titles
+to be "title case", in other words, the _first_ letter of each word is capitalized.
+Create a new array with the new names of each tutorial that is in the proper title
+case formatting.
 
 ```js
 const tutorials = [
-  { name: 'What does the this keyword mean?', duration: 80 },
-  { name: 'What is the Constructor OO pattern?', duration: 40 },
-  { name: 'Implementing Blockchain Web API', duration: 100 },
-  { name: 'The Test Driven Development Workflow', duration: 140 },
-  { name: 'What is NaN and how can we check for it', duration: 50 },
-  { name: 'What is the difference between stopPropagation and preventDefault?', duration: 90 },
-  { name: 'Immutable State and Pure Functions', duration: 75 },
-  { name: 'What is the difference between == and ===?', duration: 30 },
-  { name: 'What is the difference between event capturing and bubbling?', duration: 60 },
-  { name: 'What is JSONP?', duration: 25 },
+  'what does the this keyword mean?',
+  'What is the Contutorialuctor OO pattern?',
+  'implementing Blockchain Web API',
+  'The Test Driven Development Workflow',
+  'What is NaN and how Can we Check for it',
+  'What is the difference between stopPropagation and preventDefault?',
+  'Immutable State and Pure Functions',
+  'what is the difference between == and ===?',
+  'what is the difference between event capturing and bubbling?',
+  'what is JSONP?'
 ];
 ```
 
