@@ -1,1 +1,5 @@
-// Code your solution here
+const testVar = {}
+
+function testFunc() {
+  return "hi"
+}
