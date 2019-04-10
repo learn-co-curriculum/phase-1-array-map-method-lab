@@ -162,6 +162,8 @@ to be "title case", in other words, the _first_ letter of each word is capitaliz
 Create a new array with the new names of each tutorial that is in the proper title
 case formatting.
 
+For example, `what does the this keyword mean?` should become `What Does The This Keyword Mean?`.
+
 ```js
 const tutorials = [
   'what does the this keyword mean?',
