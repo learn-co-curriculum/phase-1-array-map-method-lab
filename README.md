@@ -104,7 +104,7 @@ Thanks to arrow functions, we can shorten up the function expression to:
 ```js
 // When the parameter list is only one element, we can drop () !
 let students = ["harry", "ron", "hermione", "ginevra"];
-let rollCall = students.map( student => student + " the wizard" )
+let rollCall = students.map(function(student) { return student + " the wizard" })
 //=> rollCall = ["harry the wizard", "ron the wizard", "hermione the wizard", "ginevra the wizard"];
 ```
 
