@@ -2,7 +2,7 @@
 
 ## Learning Goals
 
-* Define how the `map()` method works
+* Review how the `map()` method works
 * Demonstrate `map()` with `Array`s
 * Demonstrate `map()` with complex data structures
 
@@ -14,13 +14,12 @@ for these tasks, we can take advantage of a method like `map()` to save
 ourselves work and to organize and optimize our code, resulting in more readable
 and understandable functions.
 
-## Define How the `map()` Method Works
+## Review How the `map()` Method Works
 
 `Array.prototype.map()` is a method that iterates over an array and applies a
 function to each element, modifying it in some way. The result is then returned
-as a *new* array, leaving the original array the same (but remember, **not** any
-elements we modify directly; that requires defensive copying). This is super
-helpful, because it saves us from having to create a new array ourselves and
+as a *new* array, leaving the original array the same. This is super helpful,
+because it saves us from having to build out the loop, or create a new array and
 copy stuff in there. It also leaves the elements in the original array
 unchanged, which helps protect our code from bugs.
 
@@ -187,7 +186,22 @@ const tutorials = [
 ];
 ```
 
-Run `learn` and ensure that tests are passing.
+**NOTE:** This lab is challenging! You will need to iterate through the
+`tutorials` array, modifying the name of each tutorial. To do this, you will
+**also** need to access and modify each individual word.
+
+Some questions to consider:
+
+* How can we "iterate" through individual words in a string?
+* Can we execute an interation inside an iteration? How?
+* How can we capitalize just the first letter in a word?
+
+A couple of hints:
+
+* Break the task into smaller chunks: using the console or a REPL, start by
+  figuring out how to modify one individual element in the `tutorials` array.
+  Once you've got that working, then figure out how to update the array itself.
+* Use Google!!
 
 ## Conclusion
 
