@@ -5,46 +5,47 @@
 * Define how the `map()` method works
 * Demonstrate `map()` with `Array`s
 * Demonstrate `map()` with complex data structures
-* Use `map()` to generate a new array
 
 ## Introduction
 
 As developers, we find ourselves responsible for all sorts of common, but
-tedious, tasks, such as iterating over arrays. Although a `for` loop or nesting
-in lists and collections will complete the task, we can take advantage of a
-method like `map()` to organize and optimize our code into building blocks of
-functions, which we can then chain together to create more readable and
-understandable functions.
+tedious, tasks, such as iterating over arrays. Although a `for` loop will work
+for these tasks, we can take advantage of a method like `map()` to save
+ourselves work and to organize and optimize our code, resulting in more readable
+and understandable functions.
 
 ## Define How the `map()` Method Works
 
-`Array.prototype.map()` is an array method that iterates over all elements,
-allowing you to apply a function to each element in that array, and changing
-them into something else. The result is then returned as a *new* array, leaving
-the original array unmodified (but remember, **not** the elements we modify,
-that requires defensive copying). This is super important, because it saves us
-from having to create a new array ourselves and copy stuff in there, **or**
-modifying the original elements in the array, which we may need later.
+`Array.prototype.map()` is a method that iterates over an array and applies a
+function to each element, modifying it in some way. The result is then returned
+as a *new* array, leaving the original array the same (but remember, **not** any
+elements we modify directly; that requires defensive copying). This is super
+helpful, because it saves us from having to create a new array ourselves and
+copy stuff in there. It also leaves the elements in the original array
+unchanged, which helps protect our code from bugs.
 
 ## Demonstrate `map()` With `Array`s
 
-We use `map()` when we want to perform an action on each element in the
-collection, and "gather" the results into a new `Array`.
+As mentioned above, we use `map()` when we want to perform an action on each
+element in an `Array`, and "gather" the results into a new `Array`. We'll start
+by looking at how we would build the functionality ourselves, using a `for...of`
+loop, then show how `map()` can save us work and improve our code.
 
 We'll also use this as a chance to demonstrate some of the power of functions in
-JavaScript. We'll write `map()` **four times** so you can see how the iterator
-functions allow us to write more _expressive_ code.
+JavaScript. We'll write the code **four times**, making it increasingly
+efficient and _expressive_ each time.
 
-### `for` and `for...of`
+### Using `for...of` in Place of `.map()`
 
-In this example, we are using a standard bit of iteration code. Because `for`
-and `for...of` are _general_ functions that can be used to do lots of things
-another programmer won't be sure if the inner workings return values are
-important or not.
+In this example, we are using a standard bit of iteration code. The code below
+recreates the functionality of the native `.map()` method using `for...of`. But
+because `for...of` (and `for` as well) is a _general_ function that can be used
+to do lots of things, another programmer would have to examine the loop's inner
+workings to determine exactly what the code is doing.
 
 ```js
-let students = ["harry", "ron", "hermione", "ginevra"];
-let rollCall = [];
+const students = ["harry", "ron", "hermione", "ginevra"];
+const rollCall = [];
 
 for (const student of students) {
   rollCall.push( student + " the wizard" );
@@ -53,8 +54,11 @@ for (const student of students) {
 //=> rollCall = ["harry the wizard", "ron the wizard", "hermione the wizard", "ginevra the wizard"];
 ```
 
-When we write `.map()` we are saying to other programmers: "Expect a new array
-to come out of this after each element is touched!"
+If we use the `.map()` method, on the other hand, we are saying to other
+programmers: "Expect a new array to come out of this after each element is
+modified in some way!"
+
+Let's look at a few different ways to implement the native `.map()` method.
 
 ### `map()` With a Function Declaration
 
@@ -63,63 +67,65 @@ function studentRollCall(student) {
   return student + " the wizard";
 }
 
-let students = ["harry", "ron", "hermione", "ginevra"];
-let rollCall = students.map(studentRollCall);
+const students = ["harry", "ron", "hermione", "ginevra"];
+const rollCall = students.map(studentRollCall);
 //=> rollCall = ["harry the wizard", "ron the wizard", "hermione the wizard", "ginevra the wizard"];
 ```
 
-With `map()`, we have a list of _n_ things and want that list of _n_ things to
-be transformed. Here, we're passing a function _as an argument_. Arguments can
-be things like `Number` or `String`, but, in JavaScript, **can also** be
-**work**. Very few other programming languages allow that!
+We use `map()` when we want to transform the elements in an array in some way.
+To do this, we pass a function _as an argument_; that function (the callback) is
+what executes our desired transformation. In JavaScript, arguments can be
+primitive types like `Number` or `String`, but they **can also be work**. Very
+few other programming languages allow that!
 
-The iterator function `map()` expects to be _passed a function as an argument_
-which they will hand each of their elements off to. In the case of `map()` it
-hands each element to the function and stores the return value of the function
-into a new `Array`.
+The iterator function `map()` calls the callback for each element in turn,
+passing the element as an argument, and stores the return value in a new
+`Array`. When the iterations are complete, it returns that new array.
 
-This code is more _expressive_ because it lives up to the promise of map. It
-creates a new `Array` after each element is "touched" by a function.
+This code is more _expressive_ than the version using `for...of` because as soon
+as a developer sees that `map()` is being used, they know a lot about what the
+code is doing.
 
-One drawback to this code is that the `studentRollCall` function doesn't do much
-work. It just returns something that the `student` _already_ knew how to do.
-What if we use a function expression ("anonymous function") instead?
+Note that this code is using a _named_ function as the callback. This is
+perfectly valid, but the `studentRollCall` function isn't doing much work. We
+may want to streamline our code a bit more by using a function expression
+("anonymous function") instead.
 
 ### `map()` With a Function Expression
 
 ```js
-let students = ["harry", "ron", "hermione", "ginevra"];
-let rollCall = students.map(function(student) {
+const students = ["harry", "ron", "hermione", "ginevra"];
+const rollCall = students.map(function(student) {
   return student + " the wizard";
 });
 //=> rollCall = ["harry the wizard", "ron the wizard", "hermione the wizard", "ginevra the wizard"];
 ```
 
-That's much shorter. It has all the same advantages of the previous version.
+By defining a function expression inline, we're able to tighten up our code
+without changing its functionality or making it less expressive.
 
 ### `map()` With an Arrow Function
 
-Thanks to arrow functions, we can shorten up the function expression to:
+Thanks to arrow functions, we can shorten up the function even more:
 
 ```js
 // When the parameter list is only one element, we can drop () !
-let students = ["harry", "ron", "hermione", "ginevra"];
-let rollCall = students.map(student => student + " the wizard")
+const students = ["harry", "ron", "hermione", "ginevra"];
+const rollCall = students.map(student => student + " the wizard");
 //=> rollCall = ["harry the wizard", "ron the wizard", "hermione the wizard", "ginevra the wizard"];
 ```
 
-The code now fits on one line! There is much less noisy JavaScript code so the
-_expressiveness_ has increased: "`rollCall` is the result of `map`-ing
-`students`.
-
-For the rest of of these examples, we'll use the arrow function.
+The code now fits on one line! We've pared down all that noisy JavaScript code
+in the `for...of` version by using `map()` along with more efficient JavaScript
+syntax. This makes our code even more expressive: that single line of code tells
+us everything we need to know about what the code is doing.
 
 ## Demonstrate `map()` With Complex Data Structures
 
-Let's use the `map()` function on a trickier data structure — a list of robots.
-To start things off, we have an array of robots. Now, let's activate all of
-them. An activated robot needs to be marked as such using the `isActivated`
-boolean, as well as have its number of modes doubled:
+Let's use the `map()` function on a trickier data structure — a list of objects.
+To start things off, we have an array of robots. We want to activate all of
+them. To activate a robot, we need to mark it as such using the `isActivated`
+boolean, and also double its number of modes:
 
 ```js
 const robots = [
@@ -129,7 +135,7 @@ const robots = [
   { name: 'Baymax', modes: 1.5, isActivated: false, },
 ];
 
-const activatedRobots = robots.map(function (robot) {
+const activatedRobots = robots.map( robot => {
   return Object.assign({}, robot, {
     modes: robot.modes * 2,
     isActivated: true,
@@ -149,26 +155,27 @@ console.log(activatedRobots);
 */
 ```
 
-With  the native `map()` function that is a property of `Array`'s prototype, it
-gives us the exact same result! Now that we know how map is implemented, it
-holds no more secrets for us! We can discard our own `map()` function and just
-use the `map()` property on arrays.
+We could, of course, accomplish the same thing using a `for` or `for...of` loop,
+but using the native `map()` function frees us from having to create an empty
+array, code the looping mechanism, push the modified values into the empty
+array, and return the modified array at the end. Instead of having to rewrite
+the iteration code every time we need to modify elements in an array, `map()`
+allows us to focus all our effort on building the actions we need in our
+callback function.
 
-## Use `map()` to Generate a New Array
+## Lab: Using `map()` to Generate a New Array
 
 Let's put our newly acquired knowledge of `map()` to use! We just uploaded 10
 coding tutorials online, but some of them have inconsistent casing. We want all
-the titles to be "title case", in other words, the _first_ letter of each word
-is capitalized. Create a new array with the new names of each tutorial that is
-in the proper title case formatting.
-
-For example, `what does the this keyword mean?` should become `What Does The
-This Keyword Mean?`.
+the titles to be "title case", in other words, the first letter of each word
+should be capitalized. Create a new array containing the names of the tutorials
+with proper title case formatting. For example, `'what does the this keyword
+mean?'` should become `'What Does The This Keyword Mean?'`.
 
 ```js
 const tutorials = [
   'what does the this keyword mean?',
-  'What is the Contutorialuctor OO pattern?',
+  'What is the Constructor OO pattern?',
   'implementing Blockchain Web API',
   'The Test Driven Development Workflow',
   'What is NaN and how Can we Check for it',
@@ -184,10 +191,11 @@ Run `learn` and ensure that tests are passing.
 
 ## Conclusion
 
-`map()` takes 2 arguments--a callback and the optional context. The callback
-runs for each value in an array and returns each new value in the resulting
-array. It returns a new array that is the same length as the original array and
-saves time while making the code simpler and easy to read.
+`map()` takes 2 arguments — a callback and the optional context. The callback is
+called for each value in the original array and the modified value is added to a
+new array. Its return value is a new array that is the same length as the
+original array. Using `map()` saves time while making the code simpler and more
+expressive.
 
 ## Resources
 
