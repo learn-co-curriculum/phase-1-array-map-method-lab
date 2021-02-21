@@ -1,6 +1,6 @@
 const tutorials = [
   'what does the this keyword mean?',
-  'What is the Contutorialuctor OO pattern?',
+  'What is the Constructor OO pattern?',
   'implementing Blockchain Web API',
   'The Test Driven Development Workflow',
   'What is NaN and how Can we Check for it',
