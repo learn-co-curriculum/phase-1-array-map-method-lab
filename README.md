@@ -1,4 +1,4 @@
-# Iterator Drill: Map
+# Using the Array Map Method
 
 ## Learning Goals
 
