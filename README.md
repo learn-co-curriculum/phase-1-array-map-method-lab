@@ -43,14 +43,14 @@ to do lots of things, another programmer would have to examine the loop's inner
 workings to determine exactly what the code is doing.
 
 ```js
-const students = ["harry", "ron", "hermione", "ginevra"];
+const skiSchool = ["aki", "guadalupe", "lei", "aalam"];
 const rollCall = [];
 
-for (const student of students) {
-  rollCall.push( student + " the wizard" );
+for (const student of skiSchool) {
+  rollCall.push( student + " the skier" );
 }
 
-//=> rollCall = ["harry the wizard", "ron the wizard", "hermione the wizard", "ginevra the wizard"];
+//=> rollCall = ["aki the skier", "guadalupe the skier", "lei the skier", "aalam the skier"];
 ```
 
 If we use the `.map()` method, on the other hand, we are saying to other
@@ -63,12 +63,12 @@ Let's look at a few different ways to implement the native `.map()` method.
 
 ```js
 function studentRollCall(student) {
-  return student + " the wizard";
+  return student + " the skier";
 }
 
-const students = ["harry", "ron", "hermione", "ginevra"];
-const rollCall = students.map(studentRollCall);
-//=> rollCall = ["harry the wizard", "ron the wizard", "hermione the wizard", "ginevra the wizard"];
+const skiSchool = ["aki", "guadalupe", "lei", "aalam"];
+const rollCall = skiSchool.map(studentRollCall);
+//=> rollCall = ["aki the skier", "guadalupe the skier", "lei the skier", "aalam the skier"];
 ```
 
 We use `map()` when we want to transform the elements in an array in some way.
@@ -93,11 +93,11 @@ may want to streamline our code a bit more by using a function expression
 ### `map()` With a Function Expression
 
 ```js
-const students = ["harry", "ron", "hermione", "ginevra"];
-const rollCall = students.map(function(student) {
-  return student + " the wizard";
+const skiSchool = ["aki", "guadalupe", "lei", "aalam"];
+const rollCall = skiSchool.map(function(student) {
+  return student + " the skier";
 });
-//=> rollCall = ["harry the wizard", "ron the wizard", "hermione the wizard", "ginevra the wizard"];
+//=> rollCall = ["aki the skier", "guadalupe the skier", "lei the skier", "aalam the skier"];
 ```
 
 By defining a function expression inline, we're able to tighten up our code
@@ -109,9 +109,9 @@ Thanks to arrow functions, we can shorten up the function even more:
 
 ```js
 // When the parameter list is only one element, we can drop () !
-const students = ["harry", "ron", "hermione", "ginevra"];
-const rollCall = students.map(student => student + " the wizard");
-//=> rollCall = ["harry the wizard", "ron the wizard", "hermione the wizard", "ginevra the wizard"];
+const skiSchool = ["aki", "guadalupe", "lei", "aalam"];
+const rollCall = skiSchool.map(student => student + " the skier");
+//=> rollCall = ["aki the skier", "guadalupe the skier", "lei the skier", "aalam the skier"];
 ```
 
 The code now fits on one line! We've pared down all that noisy JavaScript code
@@ -193,7 +193,7 @@ const tutorials = [
 Some questions to consider:
 
 * How can we "iterate" through individual words in a string?
-* Can we execute an interation inside an iteration? How?
+* Can we execute an iteration inside an iteration? How?
 * How can we capitalize just the first letter in a word?
 
 A couple of hints:
