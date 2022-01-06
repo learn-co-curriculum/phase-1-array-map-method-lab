@@ -2,9 +2,9 @@
 
 ## Learning Goals
 
-* Review how the `map()` method works
-* Demonstrate `map()` with `Array`s
-* Demonstrate `map()` with complex data structures
+- Review how the `map()` method works
+- Demonstrate `map()` with `Array`s
+- Demonstrate `map()` with complex data structures
 
 ## Introduction
 
@@ -18,7 +18,7 @@ and understandable functions.
 
 `Array.prototype.map()` is a method that iterates over an array and applies a
 function to each element, modifying it in some way. The result is then returned
-as a *new* array, leaving the original array the same. This is super helpful,
+as a _new_ array, leaving the original array the same. This is super helpful,
 because it saves us from having to build out the loop, or create a new array and
 copy stuff in there. It also leaves the elements in the original array
 unchanged, which helps protect our code from bugs.
@@ -47,7 +47,7 @@ const skiSchool = ["aki", "guadalupe", "lei", "aalam"];
 const rollCall = [];
 
 for (const student of skiSchool) {
-  rollCall.push( student + " the skier" );
+  rollCall.push(student + " the skier");
 }
 
 //=> rollCall = ["aki the skier", "guadalupe the skier", "lei the skier", "aalam the skier"];
@@ -94,7 +94,7 @@ may want to streamline our code a bit more by using a function expression
 
 ```js
 const skiSchool = ["aki", "guadalupe", "lei", "aalam"];
-const rollCall = skiSchool.map(function(student) {
+const rollCall = skiSchool.map(function (student) {
   return student + " the skier";
 });
 //=> rollCall = ["aki the skier", "guadalupe the skier", "lei the skier", "aalam the skier"];
@@ -110,7 +110,7 @@ Thanks to arrow functions, we can shorten up the function even more:
 ```js
 // When the parameter list is only one element, we can drop () !
 const skiSchool = ["aki", "guadalupe", "lei", "aalam"];
-const rollCall = skiSchool.map(student => student + " the skier");
+const rollCall = skiSchool.map((student) => student + " the skier");
 //=> rollCall = ["aki the skier", "guadalupe the skier", "lei the skier", "aalam the skier"];
 ```
 
@@ -128,13 +128,13 @@ boolean, and also double its number of modes:
 
 ```js
 const robots = [
-  { name: 'Johnny 5', modes: 5, isActivated: false, },
-  { name: 'C3PO', modes: 3, isActivated: false, },
-  { name: 'Sonny', modes: 2.5, isActivated: false, },
-  { name: 'Baymax', modes: 1.5, isActivated: false, },
+  { name: "Johnny 5", modes: 5, isActivated: false },
+  { name: "C3PO", modes: 3, isActivated: false },
+  { name: "Sonny", modes: 2.5, isActivated: false },
+  { name: "Baymax", modes: 1.5, isActivated: false },
 ];
 
-const activatedRobots = robots.map( robot => {
+const activatedRobots = robots.map((robot) => {
   return Object.assign({}, robot, {
     modes: robot.modes * 2,
     isActivated: true,
@@ -168,23 +168,30 @@ Let's put our newly acquired knowledge of `map()` to use! We just uploaded 10
 coding tutorials online, but some of them have inconsistent casing. We want all
 the titles to be "title case", in other words, the first letter of each word
 should be capitalized. Create a new array containing the names of the tutorials
-with proper title case formatting. For example, `'what does the this keyword
-mean?'` should become `'What Does The This Keyword Mean?'`.
+with proper title case formatting. For example,
+`'what does the this keyword mean?'` should become
+`'What Does The This Keyword Mean?'`.
 
 ```js
 const tutorials = [
-  'what does the this keyword mean?',
-  'What is the Constructor OO pattern?',
-  'implementing Blockchain Web API',
-  'The Test Driven Development Workflow',
-  'What is NaN and how Can we Check for it',
-  'What is the difference between stopPropagation and preventDefault?',
-  'Immutable State and Pure Functions',
-  'what is the difference between == and ===?',
-  'what is the difference between event capturing and bubbling?',
-  'what is JSONP?'
+  "what does the this keyword mean?",
+  "What is the Constructor OO pattern?",
+  "implementing Blockchain Web API",
+  "The Test Driven Development Workflow",
+  "What is NaN and how Can we Check for it",
+  "What is the difference between stopPropagation and preventDefault?",
+  "Immutable State and Pure Functions",
+  "what is the difference between == and ===?",
+  "what is the difference between event capturing and bubbling?",
+  "what is JSONP?",
 ];
 ```
+
+Your job is to write the following function:
+
+- `titleCased()`: returns an array with title case tutorial names. Note that
+  this function takes no arguments and should use the global `tutorials`
+  variable as data.
 
 **NOTE:** This lab is challenging! You will need to iterate through the
 `tutorials` array, modifying the name of each tutorial. To do this, you will
@@ -192,16 +199,16 @@ const tutorials = [
 
 Some questions to consider:
 
-* How can we "iterate" through individual words in a string?
-* Can we execute an iteration inside an iteration? How?
-* How can we capitalize just the first letter in a word?
+- How can we "iterate" through individual words in a string?
+- Can we execute an iteration inside an iteration? How?
+- How can we capitalize just the first letter in a word?
 
 A couple of hints:
 
-* Break the task into smaller chunks: using the console or a REPL, start by
+- Break the task into smaller chunks: using the console or a REPL, start by
   figuring out how to modify one individual element in the `tutorials` array.
   Once you've got that working, then figure out how to update the array itself.
-* Use Google!!
+- Use Google!!
 
 ## Conclusion
 
@@ -213,4 +220,4 @@ expressive.
 
 ## Resources
 
-* [MDN: Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
+- [MDN: Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
