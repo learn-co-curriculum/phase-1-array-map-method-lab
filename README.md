@@ -169,7 +169,8 @@ coding tutorials online, but some of them have inconsistent casing. We want all
 the titles to be "title case", in other words, the first letter of each word
 should be capitalized. Create a new array containing the names of the tutorials
 with proper title case formatting. For example,
-`'what does the this keyword mean?'` should become `'What Does The This Keyword Mean?'`.
+`'what does the this keyword mean?'` should become
+`'What Does The This Keyword Mean?'`.
 
 ```js
 const tutorials = [
@@ -185,6 +186,12 @@ const tutorials = [
   "what is JSONP?",
 ];
 ```
+
+Your job is to write the following function:
+
+- `titleCased()`: returns an array with title case tutorial names. Note that
+  this function takes no arguments and should use the global `tutorials`
+  variable as data.
 
 **NOTE:** This lab is challenging! You will need to iterate through the
 `tutorials` array, modifying the name of each tutorial. To do this, you will
