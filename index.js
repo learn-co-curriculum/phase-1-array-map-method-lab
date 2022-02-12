@@ -12,5 +12,16 @@ const tutorials = [
 ];
 
 const titleCased = () => {
-  return tutorials
+  const newTutorials = tutorials.map(function (title) {
+    let res = "";
+    for (let x = 0; x < title.length; x++) {
+      if (x === 0) {
+        res = title[x].toUpperCase() + title.slice(x+1);
+      } else if (title[x] === ' ') {
+        res = res.slice(0,x+1) + title[x+1].toUpperCase() + title.slice(x+2);
+      }
+    }
+    return res;
+  });
+  return newTutorials
 }
