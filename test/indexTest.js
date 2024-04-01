@@ -1,4 +1,4 @@
-require ( './helpers.js' );
+import './helpers.js';
 
 describe('index.js', function () {
   describe('titleCased()', function () {
