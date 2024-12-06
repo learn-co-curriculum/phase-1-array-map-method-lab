@@ -1,9 +1,10 @@
----
-:lessons:
-- :id: 223935
-  :course_id: 6638
-  :canvas_url: https://learning.flatironschool.com/courses/6638/assignments/223935
-  :type: assignment
+~---
+~:lessons:
+~- :id: 223935
+:course_id: 6638
+:canvas_url: https://learning.flatironschool.com/courses/6638/assignments/223935
+:type: assignment
+
 - :id: 263288
   :course_id: 7550
   :canvas_url: https://learning.flatironschool.com/courses/7550/assignments/263288
