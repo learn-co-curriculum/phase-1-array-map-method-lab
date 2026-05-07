@@ -13,18 +13,18 @@ const tutorials = [
 
 const titleCased = () => {
   return tutorials.map(function(title) {
-    console.log(title)
+    //console.log(title)
     let words = title.split(" ");
-    console.log(words)
+    //console.log(words)
     words =words.map(function(word) {
-      console.log(`${word[0]} - ${word}`)
+      //console.log(`${word[0]} - ${word}`)
       word = word.replace(word[0], word[0].toUpperCase())
-      console.log(word)
+      //console.log(word)
       return word
     })
 
     title = words.join(" ")
-    console.log(title)
+    //console.log(title)
     return title
   })
 }
